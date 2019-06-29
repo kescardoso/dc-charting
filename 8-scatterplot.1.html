@@ -22,7 +22,7 @@
 <body>
     <h1>Data Visualisation</h1>
 
-    <h2>DC Scatter Plot</h2>
+    <h2>Scatter Plot</h2>
 
     <div>
         <h3>Transactions per date</h3>
@@ -53,9 +53,14 @@
             return [d.date, d.spend];
         });
         
-        var spend_group = spend_dim.group();
+        // var spend_group = spend_dim.group();
+        
+        var spend_group = spend_dim.group().reduceSum(dc.pluck('spend'));
         
         console.log(spend_group.all());
+        // Value: shows number of transactions when spend_dim.group()
+        // Value: shows the sum of total transactions when spend_dim.group().reduceSum(dc.pluck('spend'))
+        // reduceSum totals the amounts for a group
         
         var spend_chart = dc.scatterPlot("#scatter-plot");
         
